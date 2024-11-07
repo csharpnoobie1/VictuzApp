@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Smayf\\Source\\Repos\\VictuzApp\\VictuzAppMVC\\VictuzAppMVC.csproj": {}
+    "C:\\Users\\Smayf\\source\\repos\\VictuzApp\\VictuzAppMVC\\VictuzAppMVC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Smayf\\Source\\Repos\\VictuzApp\\VictuzAppMVC\\VictuzAppMVC.csproj": {
+    "C:\\Users\\Smayf\\source\\repos\\VictuzApp\\VictuzAppMVC\\VictuzAppMVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Smayf\\Source\\Repos\\VictuzApp\\VictuzAppMVC\\VictuzAppMVC.csproj",
+        "projectUniqueName": "C:\\Users\\Smayf\\source\\repos\\VictuzApp\\VictuzAppMVC\\VictuzAppMVC.csproj",
         "projectName": "VictuzAppMVC",
-        "projectPath": "C:\\Users\\Smayf\\Source\\Repos\\VictuzApp\\VictuzAppMVC\\VictuzAppMVC.csproj",
+        "projectPath": "C:\\Users\\Smayf\\source\\repos\\VictuzApp\\VictuzAppMVC\\VictuzAppMVC.csproj",
         "packagesPath": "C:\\Users\\Smayf\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Smayf\\Source\\Repos\\VictuzApp\\VictuzAppMVC\\obj\\",
+        "outputPath": "C:\\Users\\Smayf\\source\\repos\\VictuzApp\\VictuzAppMVC\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -48,6 +48,42 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Swashbuckle.AspNetCore.Swagger": {
+              "target": "Package",
+              "version": "[6.9.0, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerGen": {
+              "target": "Package",
+              "version": "[6.9.0, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerUI": {
+              "target": "Package",
+              "version": "[6.9.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
