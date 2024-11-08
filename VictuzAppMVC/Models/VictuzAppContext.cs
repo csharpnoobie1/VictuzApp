@@ -15,7 +15,7 @@ public partial class VictuzAppContext : DbContext
     {
     }
 
-    public virtual DbSet<Aanmeldingen> Aanmeldingens { get; set; }
+    public virtual DbSet<Aanmeldingen> Aanmeldingen { get; set; }
 
     public virtual DbSet<Activiteiten> Activiteitens { get; set; }
 
@@ -25,7 +25,7 @@ public partial class VictuzAppContext : DbContext
 
     public virtual DbSet<Lidmaatschappen> Lidmaatschappens { get; set; }
 
-    public virtual DbSet<ViewActiviteitenAanmeldingen> ViewActiviteitenAanmeldingens { get; set; }
+    public virtual DbSet<ViewActiviteitenAanmeldingen> ViewActiviteitenAanmeldingen { get; set; }
 
    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
