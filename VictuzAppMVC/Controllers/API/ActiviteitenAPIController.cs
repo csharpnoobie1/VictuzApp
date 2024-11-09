@@ -22,29 +22,34 @@ namespace VictuzAppMVC.Controllers.API
 
         // GET: api/ActiviteitenAPI
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Activiteiten>>> GetActiviteiten()
+        public async Task<IActionResult> GetActiviteiten()
         {
-            return await _context.Activiteitens.ToListAsync();
+            var activiteiten = await _context.Activiteitens.ToListAsync();
+            if (activiteiten == null)
+            {
+                return NotFound("Geen activiteiten gevonden.");
+            }
+            return Ok(activiteiten); // Verzeker gebruik van Ok()
         }
 
         // GET: api/ActiviteitenAPI/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<Activiteiten>> GetActiviteiten(int id)
+        public async Task<IActionResult> GetActiviteiten(int id)
         {
             var activiteiten = await _context.Activiteitens.FindAsync(id);
 
             if (activiteiten == null)
             {
-                return NotFound();
+                return NotFound($"Activiteit met ID {id} niet gevonden.");
             }
 
-            return activiteiten;
+            return Ok(activiteiten);
         }
 
         // POST: api/ActiviteitenAPI
         [HttpPost]
         [Authorize(Roles = "Bestuurslid")]
-        public async Task<ActionResult<Activiteiten>> PostActiviteiten(Activiteiten activiteiten)
+        public async Task<IActionResult> PostActiviteiten(Activiteiten activiteiten)
         {
             if (activiteiten == null)
             {
@@ -54,7 +59,7 @@ namespace VictuzAppMVC.Controllers.API
             _context.Activiteitens.Add(activiteiten);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetActiviteiten", new { id = activiteiten.ActiviteitId }, activiteiten);
+            return CreatedAtAction(nameof(GetActiviteiten), new { id = activiteiten.ActiviteitId }, activiteiten);
         }
 
         // PUT: api/ActiviteitenAPI/{id}
@@ -77,7 +82,7 @@ namespace VictuzAppMVC.Controllers.API
             {
                 if (!ActiviteitenExists(id))
                 {
-                    return NotFound();
+                    return NotFound($"Activiteit met ID {id} niet gevonden.");
                 }
                 else
                 {
@@ -97,7 +102,7 @@ namespace VictuzAppMVC.Controllers.API
 
             if (activiteiten == null)
             {
-                return NotFound();
+                return NotFound($"Activiteit met ID {id} niet gevonden.");
             }
 
             _context.Activiteitens.Remove(activiteiten);
@@ -147,7 +152,7 @@ namespace VictuzAppMVC.Controllers.API
 
         // FILTERS: api/ActiviteitenAPI/filter
         [HttpGet("filter")]
-        public async Task<ActionResult<IEnumerable<Activiteiten>>> FilterActiviteiten(
+        public async Task<IActionResult> FilterActiviteiten(
             [FromQuery] string type,
             [FromQuery] DateTime? startDatum,
             [FromQuery] string locatie)
@@ -169,7 +174,13 @@ namespace VictuzAppMVC.Controllers.API
                 query = query.Where(a => a.Locatie.Contains(locatie));
             }
 
-            return await query.ToListAsync();
+            var activiteiten = await query.ToListAsync();
+            if (activiteiten == null || !activiteiten.Any())
+            {
+                return NotFound("Geen activiteiten gevonden met deze filters.");
+            }
+
+            return Ok(activiteiten);
         }
 
         // VOORSTELLEN: api/ActiviteitenAPI/voorstel

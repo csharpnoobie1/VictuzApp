@@ -26,6 +26,26 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = C:\Users\Smayf\source\repos\VictuzApp\VictuzAppMVC
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Smayf/source/repos/VictuzApp/VictuzAppMVC/Views/Aanmeldingen/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWFubWVsZGluZ2VuXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Smayf/source/repos/VictuzApp/VictuzAppMVC/Views/Aanmeldingen/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWFubWVsZGluZ2VuXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Smayf/source/repos/VictuzApp/VictuzAppMVC/Views/Aanmeldingen/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWFubWVsZGluZ2VuXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Smayf/source/repos/VictuzApp/VictuzAppMVC/Views/Aanmeldingen/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWFubWVsZGluZ2VuXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Smayf/source/repos/VictuzApp/VictuzAppMVC/Views/Aanmeldingen/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWFubWVsZGluZ2VuXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Smayf/source/repos/VictuzApp/VictuzAppMVC/Views/Activiteitens/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0aXZpdGVpdGVuc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -46,12 +66,52 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0aXZpdGVpdGVuc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Smayf/source/repos/VictuzApp/VictuzAppMVC/Views/Gebruikers/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VicnVpa2Vyc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Smayf/source/repos/VictuzApp/VictuzAppMVC/Views/Gebruikers/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VicnVpa2Vyc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Smayf/source/repos/VictuzApp/VictuzAppMVC/Views/Gebruikers/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VicnVpa2Vyc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Smayf/source/repos/VictuzApp/VictuzAppMVC/Views/Gebruikers/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VicnVpa2Vyc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Smayf/source/repos/VictuzApp/VictuzAppMVC/Views/Gebruikers/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VicnVpa2Vyc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Smayf/source/repos/VictuzApp/VictuzAppMVC/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Smayf/source/repos/VictuzApp/VictuzAppMVC/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Smayf/source/repos/VictuzApp/VictuzAppMVC/Views/Lidmaatschappens/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlkbWFhdHNjaGFwcGVuc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Smayf/source/repos/VictuzApp/VictuzAppMVC/Views/Lidmaatschappens/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlkbWFhdHNjaGFwcGVuc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Smayf/source/repos/VictuzApp/VictuzAppMVC/Views/Lidmaatschappens/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlkbWFhdHNjaGFwcGVuc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Smayf/source/repos/VictuzApp/VictuzAppMVC/Views/Lidmaatschappens/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlkbWFhdHNjaGFwcGVuc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Smayf/source/repos/VictuzApp/VictuzAppMVC/Views/Lidmaatschappens/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlkbWFhdHNjaGFwcGVuc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Smayf/source/repos/VictuzApp/VictuzAppMVC/Views/Shared/Error.cshtml]

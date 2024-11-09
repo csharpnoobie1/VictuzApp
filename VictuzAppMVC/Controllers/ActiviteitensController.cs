@@ -1,30 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using VictuzAppMVC.Models;
+using VictuzAppMVC.Controllers.API; // Zorg ervoor dat je de API-controller importeert
+using System.Threading.Tasks;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace VictuzAppMVC.Controllers
 {
     public class ActiviteitensController : Controller
     {
-        private readonly VictuzAppContext _context;
+        private readonly ActiviteitenAPIController _activiteitenApiController;
 
-        public ActiviteitensController(VictuzAppContext context)
+        public ActiviteitensController(ActiviteitenAPIController activiteitenApiController)
         {
-            _context = context;
+            _activiteitenApiController = activiteitenApiController;
         }
 
-        // GET: Activiteitens
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Activiteitens.ToListAsync());
+            // Roep de API-controller aan en sla het resultaat op
+            var result = await _activiteitenApiController.GetActiviteiten();
+
+            // Controleer of het resultaat een OkObjectResult is
+            if (result is OkObjectResult okResult)
+            {
+                // Cast de waarde van het OkObjectResult naar de juiste lijst
+                var activiteiten = okResult.Value as List<Activiteiten>;
+                if (activiteiten != null)
+                {
+                    return View(activiteiten); // Geef de activiteiten door aan de view
+                }
+            }
+            else if (result is NotFoundResult)
+            {
+                // Als er geen activiteiten zijn gevonden, geef een foutpagina terug
+                return View("Error");
+            }
+
+            // Voor elk ander resultaat geef je een algemene foutpagina terug
+            return View("Error");
         }
 
-        // GET: Activiteitens/Details/5
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,15 +50,25 @@ namespace VictuzAppMVC.Controllers
                 return NotFound();
             }
 
-            var activiteiten = await _context.Activiteitens
-                .FirstOrDefaultAsync(m => m.ActiviteitId == id);
-            if (activiteiten == null)
+            // Roep de API aan om details op te halen
+            var result = await _activiteitenApiController.GetActiviteiten(id.Value);
+
+            if (result is OkObjectResult okResult)
+            {
+                var activiteit = okResult.Value as Activiteiten;
+                if (activiteit != null)
+                {
+                    return View(activiteit);
+                }
+            }
+            else if (result is NotFoundResult)
             {
                 return NotFound();
             }
 
-            return View(activiteiten);
+            return View("Error");
         }
+
 
         // GET: Activiteitens/Create
         public IActionResult Create()
@@ -48,23 +76,34 @@ namespace VictuzAppMVC.Controllers
             return View();
         }
 
-        // POST: Activiteitens/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ActiviteitId,Titel,Datum,MaxDeelnemers,Beschrijving")] Activiteiten activiteiten)
+        public async Task<IActionResult> Create([Bind("ActiviteitId,Titel,Datum,MaxDeelnemers,Beschrijving")] Activiteiten activiteit)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(activiteiten);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                // Roep de API aan om de activiteit te creëren
+                var result = await _activiteitenApiController.PostActiviteiten(activiteit);
+
+                // Controleer of het resultaat een CreatedAtActionResult is
+                if (result is CreatedAtActionResult)
+                {
+                    return RedirectToAction(nameof(Index)); // Succesvol, terug naar index
+                }
+                else if (result is BadRequestObjectResult badRequestResult)
+                {
+                    // Als de API een BadRequest retourneert, toon een foutpagina met details
+                    ViewBag.ErrorMessage = badRequestResult.Value?.ToString() ?? "Er is een fout opgetreden.";
+                    return View("Error");
+                }
             }
-            return View(activiteiten);
+
+            // Als het model ongeldig is, geef het formulier opnieuw weer
+            return View(activiteit);
         }
 
-        // GET: Activiteitens/Edit/5
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,50 +111,50 @@ namespace VictuzAppMVC.Controllers
                 return NotFound();
             }
 
-            var activiteiten = await _context.Activiteitens.FindAsync(id);
-            if (activiteiten == null)
+            var result = await _activiteitenApiController.GetActiviteiten(id.Value);
+
+            if (result is OkObjectResult okResult)
             {
-                return NotFound();
+                var activiteit = okResult.Value as Activiteiten;
+                if (activiteit == null)
+                {
+                    return NotFound();
+                }
+                return View(activiteit);
             }
-            return View(activiteiten);
+
+            return View("Error");
         }
 
+
+
         // POST: Activiteitens/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ActiviteitId,Titel,Datum,MaxDeelnemers,Beschrijving")] Activiteiten activiteiten)
+        public async Task<IActionResult> Edit(int id, [Bind("ActiviteitId,Titel,Datum,MaxDeelnemers,Beschrijving")] Activiteiten activiteit)
         {
-            if (id != activiteiten.ActiviteitId)
+            if (id != activiteit.ActiviteitId)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                try
+                var result = await _activiteitenApiController.PutActiviteiten(id, activiteit);
+
+                if (result is NoContentResult)
                 {
-                    _context.Update(activiteiten);
-                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!ActiviteitenExists(activiteiten.ActiviteitId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return View("Error");
                 }
-                return RedirectToAction(nameof(Index));
             }
-            return View(activiteiten);
+
+            return View(activiteit);
         }
 
-        // GET: Activiteitens/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,34 +162,42 @@ namespace VictuzAppMVC.Controllers
                 return NotFound();
             }
 
-            var activiteiten = await _context.Activiteitens
-                .FirstOrDefaultAsync(m => m.ActiviteitId == id);
-            if (activiteiten == null)
+            // Roep de API aan om activiteitdetails op te halen
+            var result = await _activiteitenApiController.GetActiviteiten(id.Value);
+
+            // Controleer of het resultaat een OkObjectResult is
+            if (result is OkObjectResult okResult)
             {
-                return NotFound();
+                var activiteit = okResult.Value as Activiteiten;
+                if (activiteit != null)
+                {
+                    return View(activiteit); // Geef de activiteit door aan de view
+                }
+            }
+            else if (result is NotFoundResult)
+            {
+                return NotFound(); // Activiteit niet gevonden
             }
 
-            return View(activiteiten);
+            // Geef een foutpagina weer bij een ander resultaat
+            return View("Error");
         }
+
+
 
         // POST: Activiteitens/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var activiteiten = await _context.Activiteitens.FindAsync(id);
-            if (activiteiten != null)
+            var result = await _activiteitenApiController.DeleteActiviteiten(id);
+
+            if (result is NoContentResult)
             {
-                _context.Activiteitens.Remove(activiteiten);
+                return RedirectToAction(nameof(Index));
             }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool ActiviteitenExists(int id)
-        {
-            return _context.Activiteitens.Any(e => e.ActiviteitId == id);
+            return View("Error");
         }
     }
 }

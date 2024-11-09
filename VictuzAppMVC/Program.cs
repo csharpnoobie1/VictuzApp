@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Text.Json.Serialization;
+using VictuzAppMVC.Controllers.API;
 
 namespace VictuzAppMVC
 {
@@ -12,9 +13,15 @@ namespace VictuzAppMVC
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-             
+
             // api controller hier toevoegen
             // builder.Services.AddScoped<ActiviteitenAPIController>(); // API Controller toevoegen (nog niet nodig)
+
+            builder.Services.AddScoped<ActiviteitenAPIController>();
+            builder.Services.AddScoped<GebruikersAPIController>();
+            builder.Services.AddScoped<LidmaatschappenAPIController>();
+            builder.Services.AddScoped<AanmeldingenAPIController>();
+
 
             // Configuratie voor JSON om cyclische referenties te negeren
             builder.Services.AddControllersWithViews()

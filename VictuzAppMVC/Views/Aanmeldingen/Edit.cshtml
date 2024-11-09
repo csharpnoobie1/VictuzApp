@@ -1,0 +1,44 @@
+﻿@model VictuzAppMVC.Models.Aanmeldingen
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Aanmeldingen</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="AanmeldingId" />
+            <div class="form-group">
+                <label asp-for="GebruikerId" class="control-label"></label>
+                <select asp-for="GebruikerId" class="form-control" asp-items="ViewBag.GebruikerId"></select>
+                <span asp-validation-for="GebruikerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ActiviteitId" class="control-label"></label>
+                <select asp-for="ActiviteitId" class="form-control" asp-items="ViewBag.ActiviteitId"></select>
+                <span asp-validation-for="ActiviteitId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AanmeldDatum" class="control-label"></label>
+                <input asp-for="AanmeldDatum" class="form-control" />
+                <span asp-validation-for="AanmeldDatum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
