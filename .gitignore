@@ -1,0 +1,16 @@
+# Ignore Visual Studio temporary files, build results, and
+# user-specific files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ignore build outputs
+bin/
+obj/
+VictuzAppMVC/obj/
+
+# Ignore NuGet packages
+packages/
+*.nupkg
