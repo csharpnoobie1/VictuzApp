@@ -1,0 +1,59 @@
+﻿@model IEnumerable<VictuzAppMVC.Models.Gebruiker>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Naam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Wachtwoord)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsBestuurslid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lidmaatschap)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Naam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Wachtwoord)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsBestuurslid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lidmaatschap.LidmaatschapId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.GebruikerId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.GebruikerId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.GebruikerId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

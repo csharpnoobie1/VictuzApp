@@ -1,3 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using VictuzAppMVC.Models;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using System.Text.Json.Serialization;
+using VictuzAppMVC.Controllers.API;
+
 namespace VictuzAppMVC
 {
     public class Program
@@ -6,16 +14,66 @@ namespace VictuzAppMVC
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // api controller hier toevoegen
+            // builder.Services.AddScoped<ActiviteitenAPIController>(); // API Controller toevoegen (nog niet nodig)
+
+            builder.Services.AddScoped<ActiviteitenAPIController>();
+            builder.Services.AddScoped<GebruikersAPIController>();
+            builder.Services.AddScoped<LidmaatschappenAPIController>();
+            builder.Services.AddScoped<AanmeldingenAPIController>();
+
+
+            // Configuratie voor JSON om cyclische referenties te negeren
+            builder.Services.AddControllersWithViews()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                });
+
+            // Voeg services toe aan de container
             builder.Services.AddControllersWithViews();
+
+            // Voeg de databasecontext toe met de juiste connection string
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            builder.Services.AddDbContext<VictuzAppContext>(options =>
+                options.UseSqlServer(connectionString));
+
+            // Voeg Swagger services toe (nog niet nodig voor API)
+            // builder.Services.AddEndpointsApiExplorer();
+
+            // builder.Services.AddSwaggerGen(c =>
+            // {
+            //     c.SwaggerDoc("v1", new OpenApiInfo
+            //     {
+            //         Title = "VictuzAppMVC API",
+            //         Version = "v1",
+            //         Description = "API voor het beheren van activiteiten en aanmeldingen bij VictuzAppMVC",
+            //         Contact = new OpenApiContact
+            //         {
+            //             Name = "Support Team",
+            //             Email = "support@victuzapp.com"
+            //         }
+            //     });
+            // });
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
+            // Configureer de HTTP request pipeline
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();  // Gedetailleerde foutpagina tijdens ontwikkeling
+
+                // Swagger configuratie voor API-documentatie (nog niet nodig)
+                // app.UseSwagger();
+                // app.UseSwaggerUI(c =>
+                // {
+                //     c.SwaggerEndpoint("/swagger/v1/swagger.json", "VictuzAppMVC API v1");
+                //     c.RoutePrefix = "swagger";
+                // });
+            }
+            else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -23,9 +81,12 @@ namespace VictuzAppMVC
             app.UseStaticFiles();
 
             app.UseRouting();
-
             app.UseAuthorization();
 
+            // API routes (nog niet nodig)
+            // app.MapControllers();
+
+            // MVC routes
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
