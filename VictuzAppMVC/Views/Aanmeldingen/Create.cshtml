@@ -1,38 +1,39 @@
 ﻿@model VictuzAppMVC.Models.Aanmeldingen
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Aanmelding Toevoegen";
 }
 
-<h1>Create</h1>
+<div class="container mt-5">
+    <h1 class="text-center mb-4" style="font-family: 'Poppins', sans-serif; font-weight: bold;">Aanmelding Toevoegen</h1>
 
-<h4>Aanmeldingen</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="GebruikerId" class="control-label"></label>
-                <select asp-for="GebruikerId" class ="form-control" asp-items="ViewBag.GebruikerId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="ActiviteitId" class="control-label"></label>
-                <select asp-for="ActiviteitId" class ="form-control" asp-items="ViewBag.ActiviteitId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
+                <div class="mb-3">
+                    <label asp-for="GebruikerId" class="form-label">Gebruiker</label>
+                    <select asp-for="GebruikerId" class="form-control" asp-items="ViewBag.GebruikerId"></select>
+                </div>
 
-            </div>
-        </form>
+                <div class="mb-3">
+                    <label asp-for="ActiviteitId" class="form-label">Activiteit</label>
+                    <select asp-for="ActiviteitId" class="form-control" asp-items="ViewBag.ActiviteitId"></select>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Toevoegen</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="text-center mt-3">
+        <a asp-action="Index" class="btn btn-secondary">Terug naar overzicht</a>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

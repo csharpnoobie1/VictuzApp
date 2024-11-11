@@ -1,41 +1,46 @@
 ﻿@model IEnumerable<VictuzAppMVC.Models.Lidmaatschappen>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lidmaatschappen";
 }
 
-<h1>Index</h1>
+<div class="container mt-5">
+    <h1 class="text-center mb-4" style="font-family: 'Poppins', sans-serif; font-weight: bold;">Lidmaatschappen</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Beschrijving)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Beschrijving)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.LidmaatschapId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.LidmaatschapId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.LidmaatschapId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="text-end mb-3">
+        <a asp-action="Create" class="btn btn-primary" style="font-family: 'Poppins', sans-serif;">Nieuw Lidmaatschap Toevoegen</a>
+    </div>
+
+    <table class="table table-striped table-hover align-middle" style="font-family: 'Poppins', sans-serif;">
+        <thead class="table-primary">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Status)</th>
+                <th>@Html.DisplayNameFor(model => model.Beschrijving)</th>
+                <th class="text-center">Acties</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Beschrijving)</td>
+                        <td class="text-center">
+                            <a asp-action="Edit" asp-route-id="@item.LidmaatschapId" class="btn btn-sm btn-warning mx-1">Bewerken</a>
+                            <a asp-action="Details" asp-route-id="@item.LidmaatschapId" class="btn btn-sm btn-info mx-1 text-white">Details</a>
+                            <a asp-action="Delete" asp-route-id="@item.LidmaatschapId" class="btn btn-sm btn-danger mx-1">Verwijderen</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="3" class="text-center text-muted">Geen lidmaatschappen gevonden.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

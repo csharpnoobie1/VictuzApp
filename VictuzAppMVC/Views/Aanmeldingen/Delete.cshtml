@@ -1,39 +1,32 @@
 ﻿@model VictuzAppMVC.Models.Aanmeldingen
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Aanmelding Verwijderen";
 }
 
-<h1>Delete</h1>
+<div class="container mt-5">
+    <h1 class="text-center mb-4" style="font-family: 'Poppins', sans-serif; font-weight: bold; color: #dc3545;">Aanmelding Verwijderen</h1>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Aanmeldingen</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.AanmeldDatum)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AanmeldDatum)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Activiteit)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Activiteit.ActiviteitId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Gebruiker)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Gebruiker.GebruikerId)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="AanmeldingId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+    <h4 class="text-center mb-4" style="font-family: 'Poppins', sans-serif;">Weet je zeker dat je deze aanmelding wilt verwijderen?</h4>
+
+    <div class="card shadow-sm p-4">
+        <dl class="row mb-0" style="font-family: 'Poppins', sans-serif;">
+            <dt class="col-sm-4">Aanmeld Datum:</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.AanmeldDatum)</dd>
+
+            <dt class="col-sm-4">Activiteit:</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Activiteit.ActiviteitId)</dd>
+
+            <dt class="col-sm-4">Gebruiker:</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Gebruiker.GebruikerId)</dd>
+        </dl>
+    </div>
+
+    <div class="text-center mt-4">
+        <form asp-action="Delete" style="display: inline-block;">
+            <input type="hidden" asp-for="AanmeldingId" />
+            <button type="submit" class="btn btn-danger me-2">Verwijderen</button>
+        </form>
+        <a asp-action="Index" class="btn btn-secondary">Terug naar overzicht</a>
+    </div>
 </div>
