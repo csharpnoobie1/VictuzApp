@@ -1,48 +1,53 @@
 ﻿@model VictuzAppMVC.Models.Activiteiten
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Activiteit Toevoegen";
 }
 
-<h1>Create</h1>
+<div class="container mt-5">
+    <h1 class="text-center mb-4" style="font-family: 'Poppins', sans-serif; font-weight: bold;">Activiteit Toevoegen</h1>
 
-<h4>Activiteiten</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Titel" class="control-label"></label>
-                <input asp-for="Titel" class="form-control" />
-                <span asp-validation-for="Titel" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Datum" class="control-label"></label>
-                <input asp-for="Datum" class="form-control" />
-                <span asp-validation-for="Datum" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MaxDeelnemers" class="control-label"></label>
-                <input asp-for="MaxDeelnemers" class="form-control" />
-                <span asp-validation-for="MaxDeelnemers" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Beschrijving" class="control-label"></label>
-                <input asp-for="Beschrijving" class="form-control" />
-                <span asp-validation-for="Beschrijving" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="mb-3">
+                    <label asp-for="Titel" class="form-label">Titel</label>
+                    <input asp-for="Titel" class="form-control" />
+                    <span asp-validation-for="Titel" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Datum" class="form-label">Datum</label>
+                    <input asp-for="Datum" type="date" class="form-control" />
+                    <span asp-validation-for="Datum" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="MaxDeelnemers" class="form-label">Maximaal Aantal Deelnemers</label>
+                    <input asp-for="MaxDeelnemers" type="number" class="form-control" />
+                    <span asp-validation-for="MaxDeelnemers" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Beschrijving" class="form-label">Beschrijving</label>
+                    <textarea asp-for="Beschrijving" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="Beschrijving" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Aanmaken</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="text-center mt-3">
+        <a asp-action="Index" class="btn btn-secondary">Terug naar overzicht</a>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

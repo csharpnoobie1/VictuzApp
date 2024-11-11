@@ -1,52 +1,58 @@
 ﻿@model VictuzAppMVC.Models.Gebruiker
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Gebruiker Toevoegen";
 }
 
-<h1>Create</h1>
+<div class="container mt-5">
+    <h1 class="text-center mb-4" style="font-family: 'Poppins', sans-serif; font-weight: bold;">Gebruiker Toevoegen</h1>
 
-<h4>Gebruiker</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Naam" class="control-label"></label>
-                <input asp-for="Naam" class="form-control" />
-                <span asp-validation-for="Naam" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Wachtwoord" class="control-label"></label>
-                <input asp-for="Wachtwoord" class="form-control" />
-                <span asp-validation-for="Wachtwoord" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsBestuurslid" /> @Html.DisplayNameFor(model => model.IsBestuurslid)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="LidmaatschapId" class="control-label"></label>
-                <select asp-for="LidmaatschapId" class ="form-control" asp-items="ViewBag.LidmaatschapId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="mb-3">
+                    <label asp-for="Naam" class="form-label">Naam</label>
+                    <input asp-for="Naam" class="form-control" />
+                    <span asp-validation-for="Naam" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Email" class="form-label">Email</label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Wachtwoord" class="form-label">Wachtwoord</label>
+                    <input asp-for="Wachtwoord" type="password" class="form-control" />
+                    <span asp-validation-for="Wachtwoord" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3 form-check">
+                    <input asp-for="IsBestuurslid" class="form-check-input" />
+                    <label asp-for="IsBestuurslid" class="form-check-label">Bestuurslid</label>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="LidmaatschapId" class="form-label">Lidmaatschap</label>
+                    <select asp-for="LidmaatschapId" class="form-control" asp-items="ViewBag.LidmaatschapId"></select>
+                    <span asp-validation-for="LidmaatschapId" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Toevoegen</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="text-center mt-3">
+        <a asp-action="Index" class="btn btn-secondary">Terug naar overzicht</a>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

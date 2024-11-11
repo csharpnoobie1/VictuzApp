@@ -4,45 +4,33 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<div class="container mt-5">
+    <h1 class="text-center mb-4" style="font-family: 'Poppins', sans-serif; font-weight: bold; color: #dc3545;">Details</h1>
 
-<div>
-    <h4>Gebruiker</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Naam)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Naam)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Wachtwoord)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Wachtwoord)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsBestuurslid)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsBestuurslid)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Lidmaatschap)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Lidmaatschap.LidmaatschapId)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.GebruikerId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+  
+
+    <div class="card shadow-sm p-4">
+        <dl class="row mb-0" style="font-family: 'Poppins', sans-serif;">
+            <dt class="col-sm-4">Naam:</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Naam)</dd>
+
+            <dt class="col-sm-4">Email:</dt>
+            <dd class="col-sm-8">@Html.DisplayFor(model => model.Email)</dd>
+
+            <dt class="col-sm-4">Wachtwoord:</dt>
+            <dd class="col-sm-8"><span class="text-muted">••••••••</span></dd>
+
+            <dt class="col-sm-4">Bestuurslid:</dt>
+            <dd class="col-sm-8">
+                @if (Model.IsBestuurslid)
+                {
+                    <span class="badge bg-success">Ja</span>
+                }
+                else
+                {
+                    <span class="badge bg-danger">Nee</span>
+                }
+            </dd>
+
+            <dt class="col-sm-4">Lidmaatschap:</dt>
+            <dd class="col-sm-8">@Html

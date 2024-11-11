@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Text.Json.Serialization;
 using VictuzAppMVC.Controllers.API;
+using Microsoft.OpenApi.Models;
+
 
 namespace VictuzAppMVC
 {
@@ -15,7 +17,7 @@ namespace VictuzAppMVC
             var builder = WebApplication.CreateBuilder(args);
 
             // api controller hier toevoegen
-            // builder.Services.AddScoped<ActiviteitenAPIController>(); // API Controller toevoegen (nog niet nodig)
+            // builder.Services.AddScoped<ActiviteitenAPIController>(); 
 
             builder.Services.AddScoped<ActiviteitenAPIController>();
             builder.Services.AddScoped<GebruikersAPIController>();
@@ -38,23 +40,23 @@ namespace VictuzAppMVC
             builder.Services.AddDbContext<VictuzAppContext>(options =>
                 options.UseSqlServer(connectionString));
 
-            // Voeg Swagger services toe (nog niet nodig voor API)
-            // builder.Services.AddEndpointsApiExplorer();
+            // Voeg Swagger services toe 
+             builder.Services.AddEndpointsApiExplorer();
 
-            // builder.Services.AddSwaggerGen(c =>
-            // {
-            //     c.SwaggerDoc("v1", new OpenApiInfo
-            //     {
-            //         Title = "VictuzAppMVC API",
-            //         Version = "v1",
-            //         Description = "API voor het beheren van activiteiten en aanmeldingen bij VictuzAppMVC",
-            //         Contact = new OpenApiContact
-            //         {
-            //             Name = "Support Team",
-            //             Email = "support@victuzapp.com"
-            //         }
-            //     });
-            // });
+             builder.Services.AddSwaggerGen(c =>
+             {
+                 c.SwaggerDoc("v1", new OpenApiInfo
+                 {
+                     Title = "VictuzAppMVC API",
+                     Version = "v1",
+                     Description = "API voor het beheren van activiteiten en aanmeldingen bij VictuzAppMVC",
+                     Contact = new OpenApiContact
+                     {
+                         Name = "Support Team",
+                         Email = "support@victuzapp.com"
+                     }
+                 });
+             });
 
             var app = builder.Build();
 
@@ -63,13 +65,13 @@ namespace VictuzAppMVC
             {
                 app.UseDeveloperExceptionPage();  // Gedetailleerde foutpagina tijdens ontwikkeling
 
-                // Swagger configuratie voor API-documentatie (nog niet nodig)
-                // app.UseSwagger();
-                // app.UseSwaggerUI(c =>
-                // {
-                //     c.SwaggerEndpoint("/swagger/v1/swagger.json", "VictuzAppMVC API v1");
-                //     c.RoutePrefix = "swagger";
-                // });
+                 //Swagger configuratie voor API-documentatie 
+                 app.UseSwagger();
+                 app.UseSwaggerUI(c =>
+                 {
+                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "VictuzAppMVC API v1");
+                     c.RoutePrefix = "swagger";
+                 });
             }
             else
             {
@@ -83,8 +85,8 @@ namespace VictuzAppMVC
             app.UseRouting();
             app.UseAuthorization();
 
-            // API routes (nog niet nodig)
-            // app.MapControllers();
+            // API routes 
+             app.MapControllers();
 
             // MVC routes
             app.MapControllerRoute(
